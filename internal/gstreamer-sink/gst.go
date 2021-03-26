@@ -30,9 +30,9 @@ func CreatePipeline(codecName string) *Pipeline {
 	pipelineStr := "appsrc format=time is-live=true do-timestamp=true name=src ! application/x-rtp"
 	switch codecName {
 	case "vp8":
-		pipelineStr += ", encoding-name=VP8-DRAFT-IETF-01 ! rtpvp8depay ! decodebin ! autovideosink"
+		pipelineStr += ", encoding-name=VP8-DRAFT-IETF-01 ! rtpvp8depay ! decodebin ! hlssink2 max-files=5"
 	case "opus":
-		pipelineStr += ", payload=96, encoding-name=OPUS ! rtpopusdepay ! decodebin ! autoaudiosink"
+		pipelineStr += ", payload=96, encoding-name=OPUS ! rtpopusdepay ! decodebin ! hlssink2 max-files=5"
 	case "vp9":
 		pipelineStr += " ! rtpvp9depay ! decodebin ! autovideosink"
 	case "h264":
